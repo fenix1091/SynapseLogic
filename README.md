@@ -1,0 +1,2 @@
+# SynapseLogic
+Proyecto Estructura
