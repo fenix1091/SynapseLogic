@@ -9,7 +9,7 @@ Review*
 ## Repositorio 
 URL: [https://github.com/fenix1091/SynapseLogic]
 
-## Librerías y Lenguaje de Programación empleado
+## Librerías y herramientas empleadas
 * **Lenguaje:** Java
 * **Entorno:** NetBeans
 
