@@ -2,7 +2,7 @@
 
 ## Integrantes 
 * José David Martínez Clavijo - C.I 32504707
-* [Nombre Compañero 1]--
+* Daniel Da Silva - C.I 32560909
 
 # Repositorio 
 URL: [https://github.com/fenix1091/SynapseLogic]
