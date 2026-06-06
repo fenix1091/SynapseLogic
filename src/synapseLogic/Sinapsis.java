@@ -5,7 +5,7 @@ public class Sinapsis {
   private double coeficiente; 
   public Sinapsis pSinapsis; 
 
-  public Sinapsis(String destino, double distancia, String idNeurotransmisor, double coeficiente) {
+  public Sinapsis(Neurona destino, double distancia, String idNeurotransmisor, double coeficiente) {
     this.destino = destino;
     this.distancia = distancia;
     this.idNeurotransmisor = idNeurotransmisor;
