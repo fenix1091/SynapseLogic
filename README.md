@@ -1,19 +1,44 @@
 # SynapseLogic
 Proyecto Estructura
 
-## public class Neurotransmisor {
-  private String idElemento;
-  private String nombre;
-  private double transmision; 
+## package synapselogic;
 
-  public Neurotransmisor(String idElemento, String nombre, double trasmision) {
-    this.idElemento = idElemento;
-    this.nombre = nombre;
-    this.transmision = transmision;
+public class Conexion {
+    private Neurona destino;
+    private double distancia;
+    private String idNeurotransmisor;
+    private double coeficiente;
+    
+   public Conexion(String destino, double distancia, String idNeurotransmisor, double coeficiente) {
+        this.destino = destino;
+        this.distancia = distancia;
+        this.idNeurotransmisor = idNeurotransmisor;
+        this.coeficiente = coeficiente;
+
+   public double calcularPeso(HashTable Neurotransmisores) {
+     Neurotransmisor nt = Neurotransmiroes(this.idNeurotransmisor); 
+     double velocidad;
+     if (nt != null) {
+       velocidad = nt.getVelocidad();
+    } else {
+      velocidad = 1.0;
+    }
+    public String getDestino() {
+        return destino;
+    }
+    public double getDistancia() {
+        return distancia;
+    }
+    public String getIdNeurotransmisor() {
+        return idNeurotransmisor;
+    }
+    public double getCoeficiente() {
+        return coeficiente;
+    }
+    public void setCoeficiente(double coeficiente) {
+        this.coeficiente = coeficiente;
+    }
 }
-  public String getIdElemento() { return idElemento; } 
-  public String getNombre() { return nombreComun; } 
-  public double getTransimision() { return transmision; }
 
 ## public class HashTable {
 
