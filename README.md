@@ -225,45 +225,7 @@ package synapselogic;
 }
 
 
-## public class Sinapsis { 
-    private Neurona destino; 
-    private String idNeurotransmisor; 
-    private double longitud; 
-    private double rendimiento; 
-    public Sinapsis pCanal; 
 
-    public Sinapsis(Neurona destino, String idNeurotransmisor, double longitud, double rendimiento) {
-        this.destino = destino; 
-        this.idNeurotransmisor = idNeurotransmisor;
-        this.longitud = longitud; 
-        this.rendimiento = rendimiento; 
-        this.pCanal = null; 
-      }
-    public double pesoEfectivo(HashTable mapa) {
-        Neurotransmisor tr = mapa.getElemento(this.idNeurotransmisor);
-        double velocidad = (tr != null) ? tr.getTransmision(); 
-        return this.longitud / (velocidad * this.rendimiento);
-      }
-    public void degradacion() { 
-        this.rendimiento *= 1.2;
-    }
-
-    public Neurona getDestino() { return destino; }
-    public String getIdNeurotransmisor() { return idNeurotransmisor, } 
-    }
-
-    public class RedNeuronal
-      private String identificador;
-      private String esFuncional; 
-      private Sipnasis Adyacentes; 
-      public RedNeuronal pProximaRed;
-
-    public RedNeuronal(String identificador, String esFuncional) {
-        this.identificador = identificador;
-        this.esFunconal = esFuncional; 
-        this.Adyacentes = null; 
-        this.pProximaRed = null; 
-  }
 
   ## public class Grafo { 
       private Neurona pHead;
