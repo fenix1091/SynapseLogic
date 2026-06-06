@@ -417,7 +417,8 @@ package synapselogic;
         }
 
          public int getTotalNeuronas () { 
-            return total; 
+            return total;
+        }
          public Neurona pHead() {
             return pHead; 
         }
