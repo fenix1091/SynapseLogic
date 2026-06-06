@@ -14,7 +14,7 @@ public class Sinapsis {
   } 
 
   public double calcularPeso(HashTable Neurotransmisores) {
-    Neurotransmisor nt = Neurotransmirores.get(this.idNeurotransmisor); 
+    Neurotransmisor nt = Neurotransmisores.get(this.idNeurotransmisor); 
     double velocidad;
     if (nt != null) {
        velocidad = nt.getVelocidad();
