@@ -1,7 +1,7 @@
 # SynapseLogic
 Proyecto Estructura
 
-public class Neurotransmisor {
+## public class Neurotransmisor {
   private String idElemento;
   private String nombre;
   private double transmision; 
@@ -15,58 +15,104 @@ public class Neurotransmisor {
   public String getNombre() { return nombreComun; } 
   public double getTransimision() { return transmision; }
 
-public class HashTable {
+## public class HashTable {
 
-  private static class CeldaDeHash { 
+  private static class NodoHash { 
     Neurotransmisor elemento; 
-    CeldaDeHash pCelda; 
-
-   CeldaDeHash(Neurotransmisor elemento) { 
+    NodoHash pNodo;
+    
+   NodoHash(Neurotransmisor elemento) { 
       this.elemento = elemento; 
-      this.pCelda = null; 
+      this.pNodo = null; 
       } 
   }
 
-  private CeldaDeHash[] espacios; 
-  private final int indice; 
+  private NodoHash[] espacios; 
+  private int capacidad; 
+  private int tamaño; 
 
   public HashTable() {
-    this.dimension = 19; 
-    this.espacios = new CeldaDeHash[dimension]; 
+    this.capacidad = 31; 
+    this.espacios = new NodoHash[capacidad]; 
+    this.tamaño = 0;
   }
 
   private int IndiceHash(string clave) {
   int valor = 0
   for (int i = 0; < clave.lenght(); i++) {
-    valor = (37 * valor + clave.char(i) % espacios);
+    valor = (31 * valor + clave.char(i) % espacios);
     }
     return Math.abs(valor)
   }
 
-  public void registarElemento(Neurotransmisor tr) {
-    int posicion = calcularIndiceHash(tr.getIdElemento());
-    CeldaDeHash espacioNuevo = new CeldaDeHash(tr);
-
+  public void insertarHash(Neurotransmisor n) {
+    if (n == null){
+    n.getId() == null); 
+    return; 
+    } 
+    int posision = IndiceHash(n.getId());
+    NodoHash espacioNuevo = new NodoHash(n):
+    
   if (espacios[posicion] == null) {
       espacios[posicion] = espacioNuevo;
-    } else {
-      CeldaDeHash pActual = espacios[posicion];
-      while (pActual.pCelda != null) { 
-        if (pActual.elemento.getIdElemento().equals(eq.getIdElemento())){
-          pActual.elemento = tr;
+      tamaño++;
+      return;
+    }
+      NodoHash pActual = espacios[posicion];
+      while (pActual != null) { 
+        if (pActual.elemento.getId().equals(n.getId())){
+          pActual.elemento = n;
           return;
         }
-        pActual = pActual.pCelda;
+        if (pActual.pCelda == null) {
+          break;
+        }
+        pActual = pActual.pCelda; 
     }
-    if (pActual.elemento.getIdElemento().equals(tr.getIdElemento))){
-      pActual.elemento = tr;
-      } else {
-        pActual.pCelda = espacioNuevo;
-      }
+    pActual.pCelda = espacioNuevo;
+    tamaño++;
   }
+    public Neurotransmisor obtener(String clave){
+      if (clave == null) return null;
+      int posicion = indiceHash(clave);
+      NodoHash pActual = espacios[posicion];
+      while (pActual != null) {
+        if (pActual.elemento.getId().equals(clave)){
+          return pActual.elemento;
+          }
+          pActual = pActual.pCelda;
+        }
+        return null;
+      }
+      public void eliminar(String clave) {
+        if (clave == null) return; 
+        int posicion = indiceHash(clave);
+        NodoHash pActual = espacios[posicion];
+        NodoHash pAnterior = null;
+        while (pActual != null) {
+          if (pActual.elemento.getId().equals(clave)) {
+            if (pAnterior == null) {
+              espacios[posicion] = pActual.pCelda;
+            } else {
+                pAnterior.pCelda = pActual.pCelda;
+            }
+            tamaño--;
+            return;
+          }
+          pAnterior = pActual;
+          pActual = pActual.pCelda;
+        }
+      }
+      public void vaciar() {
+        this.espacios = new NodoHash[capacidad];
+        this.tamaño = 0;
+      }
+      public int getTamaño() {
+        return tamaño;
+      }
 }
 
-public class Sinapsis { 
+## public class Sinapsis { 
   private Neurona destino; 
   private String idNeurotransmisor; 
   private double longitud; 
