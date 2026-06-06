@@ -31,3 +31,4 @@ public class Neurona {
   public Sinapsis getConexiones() {
     return conexiones;
   } 
+}
