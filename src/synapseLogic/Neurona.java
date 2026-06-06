@@ -1,1 +1,33 @@
+public class Neurona {
+  private String id;
+  private String tipo; 
+  private Sinapsis conexiones;
+  public Neurona pNeurona; 
 
+  public Neurona(String id, String tipo) {
+    this.id = id;
+    this.tipo = tipo;
+    this.conexiones = null;
+    this.pNeurona = null; 
+}
+
+  public void agregarConexion(Sinapsis enlace) { 
+    if (enlace == null) {
+      return;
+    } else {
+        enlace.pSinapsis = this.conexiones;
+        this.conexiones = enlace;
+      }
+  }
+
+  public String getId() {
+    return id;
+  } 
+
+  public String getTipo() {
+    return tipo;
+  } 
+
+  public Sinapsis getConexiones() {
+    return conexiones;
+  } 
