@@ -7,7 +7,7 @@
 * **Daniel Da Silva** - C.I 32560909 - Carnet: 
 
 ## Repositorio 
-URL: [https://github.com/fenix1091/SynapseLogic]
+URL: https://github.com/fenix1091/SynapseLogic
 
 ## Librerías y herramientas empleadas
 * **Lenguaje:** Java
