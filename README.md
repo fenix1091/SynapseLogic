@@ -47,7 +47,7 @@ public class HashTable {
     int posicion = calcularIndiceHash(tr.getIdElemento());
     CeldaDeHash espacioNuevo = new CeldaDeHash(tr);
 
-    if (espacios[posicion] == null) {
+  if (espacios[posicion] == null) {
       espacios[posicion] = espacioNuevo;
     } else {
       CeldaDeHash pActual = espacios[posicion];
