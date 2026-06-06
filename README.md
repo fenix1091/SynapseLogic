@@ -80,7 +80,7 @@ package synapselogic;
     private double distancia;
     private String idNeurotransmisor;
     private double coeficiente; 
-    public Sinapsis pSipnasis; 
+    public Sinapsis pSinapsis; 
     
     public Sinapsis(String destino, double distancia, String idNeurotransmisor, double coeficiente) {
         this.destino = destino;
@@ -88,9 +88,10 @@ package synapselogic;
         this.idNeurotransmisor = idNeurotransmisor;
         this.coeficiente = coeficiente;
         this.pSinapsis = null;
+    } 
 
     public double calcularPeso(HashTable Neurotransmisores) {
-        Neurotransmisor nt = Neurotransmiroes(this.idNeurotransmisor); 
+        Neurotransmisor nt = Neurotransmirores.get(this.idNeurotransmisor); 
         double velocidad;
         if (nt != null) {
            velocidad = nt.getVelocidad();
@@ -143,20 +144,20 @@ package synapselogic;
         this.tamaño = 0;
     }
 
-    private int IndiceHash(string clave) {
-        int valor = 0
-        for (int i = 0; < clave.lenght(); i++) {
-        valor = (31 * valor + clave.char(i) % espacios);
+    private int IndiceHash(String clave) {
+        int valor = 0;
+        for (int i = 0; i < clave.length(); i++) {
+        valor = (31 * valor + clave.charAt(i));
         }
-        return Math.abs(valor)
+        return Math.abs(valor) % capacidad;
     }
     public void insertarHash(Neurotransmisor n) {
-        if (n == null) || n.getId() == null { 
-        return; 
+        if (n == null || n.getId() == null) { 
+            return; 
         } 
+        
         int posicion = IndiceHash(n.getId());
         NodoHash espacioNuevo = new NodoHash(n);
-    
         if (espacios[posicion] == null) {
           espacios[posicion] = espacioNuevo;
           tamaño++;
@@ -165,10 +166,10 @@ package synapselogic;
     
         NodoHash pActual = espacios[posicion];
         while (pActual != null) { 
-            if (pActual.elemento.getId().equals(n.getId())){
+            if (pActual.elemento.getId().equals(n.getId())) {
               pActual.elemento = n;
               return;
-        }
+            }
             if (pActual.pNodo == null) {
               break;
             }
@@ -176,7 +177,7 @@ package synapselogic;
         }
         pActual.pNodo = espacioNuevo;
         tamaño++;
-      }
+    }
     public Neurotransmisor get(String clave) {
       if (clave == null) { 
           return null;
@@ -224,9 +225,6 @@ package synapselogic;
       }
 }
 
-
-
-
   ## public class Grafo { 
       private Neurona pHead;
       private int total;
@@ -235,7 +233,7 @@ package synapselogic;
       public Grafo() {
           this.pHead = null;
           this.total = 0;
-          this.diccionaro = null;
+          this.diccionario = null;
       }
 
       public void setDiccionario(HashTable diccionario) {
@@ -250,8 +248,8 @@ package synapselogic;
             nuevaNe.pNeurona = pHead;
             pHead = nuevaNe; 
             total++;
-         } 
-        }
+        } 
+      }
 
         public Neurona buscarNeurona(String id) { 
             Neurona pActual = pHead; 
@@ -266,10 +264,10 @@ package synapselogic;
 
         public void agregarSinapsis(String idOrigen, String destino, double distancia, String idNeurotransmisor, double coeficiente) {
             Neurona origen = buscarNeurona(idOrigen);
-            Neurona destino = buscarNeurona(idDestino);
+            Neurona destino = buscarNeurona(destino);
             if (origen != null && destino != null) {
-                Sinapsis nuevaSp = new Sipnasis (destino, distancia, idNeurotransmisor, coeficiente);
-                origen.agregarEnlace(nuevaSp);
+                Sinapsis nuevaSp = new Sinapsis (destino, distancia, idNeurotransmisor, coeficiente);
+                origen.agregarConexion(nuevaSp);
             }
         }
 
@@ -277,38 +275,42 @@ package synapselogic;
             Neurona n = pHead; 
             while (n != null) { 
                 Sinapsis s = n.getConexiones();
-                while (c != null) { 
-                    s = n.getConexiones() * 1.2); 
-                    c = c.pSinapsis; 
+                while (s != null) { 
+                    s.setCoeficiente(s.getCoeficiente() * 1.2);
+                    s = s.pSinapsis; 
                 }
-             n = n.pNeurona; 
+                 n = n.pNeurona; 
              } 
          } 
 
          public String[] BFS(String idInicio) {
              Neurona inicio = buscarNeurona(idInicio);
              if (inicio == null) { 
-                 return new String[0};
+                 return new String[0];
             }
             String[] cola = new String[total];
             String[] visitados = new String[total];
             int head = 0;
             int last = 0;
             int contVisitados = 0;
-
-            cola[fin++] = inicio.getId();
-            visitados[contVisitados++] = inicio.getId();
+            cola[last] = inicio.getId();
+            last++;
+            visitados[contVisitados] = inicio.getId();
+            contVisitados++;
 
             while (head < last) {
-                String actualId = cola[frente++]
+                String actualId = cola[head]
+                head++;
                 Neurona actualNodo = buscarNeurona(actualId);
                 if (actualNodo != null) { 
-                    Sipnasis s = actualNodo.getConexiones();
+                    Sinapsis s = actualNodo.getConexiones();
                     while (s != null) { 
-                        String idDestino = c.getDestino().get(Id); 
-                        if (!contiene(visitados, contVisitados, idDestino)) {
-                            visitados[contVisitados++] = idDestino; 
-                            cola[last++] = idDestino;
+                        String idDestino = s.getDestino().get(Id); 
+                        if (contiene(visitados, contVisitados, idDestino) == false) {
+                            visitados[contVisitados] = idDestino; 
+                            contVisitados++;
+                            cola[last] = idDestino;
+                            last++;
                         }
                         s = s.pSinapsis; 
                     }
@@ -321,14 +323,14 @@ package synapselogic;
             if (buscarNeurona(idOrigen) == null || buscarNeurona(idDestino) == null) { 
                 return new String[0];
             } 
-            String[] mapa = new String[total] 
+            String[] mapa = new String[total]; 
             Neurona current = pHead;
             int index = 0;
             while (current != null) { 
                 mapa[index++] = current.getId();
                 current = current.pNeurona; 
             }
-            double[] distancia = new double[total};
+            double[] distancia = new double[total];
             int[] previo = new int[total];
             boolean[] visitado = new boolean[total];
 
@@ -337,7 +339,7 @@ package synapselogic;
                 previo[i] = -1; 
                 visitado[i] = false; 
             } 
-            int idxI = getIndice(index, idOrigen); 
+            int idxI = obtenerIndice(index, idOrigen); 
             distancia[idxI] = 0; 
 
             for (int paso = 0; paso < total; paso++) { 
@@ -358,18 +360,18 @@ package synapselogic;
                 if (nodoU != null) { 
                     Sinapsis s = nodoU.getConexiones();
                     while (s != null) { 
-                        int v = getIndice(mapa,c.getDestino().getId());
-                        double peso = c.calcularPeso(this.diccionario); 
+                        int v = getIndice(mapa, s.getDestino().getId());
+                        double peso = s.calcularPeso(this.diccionario); 
                         if (distancia[u] + peso < distancia[v]) { 
                             distancia[v] = distancia[u] + peso; 
                             previo[v] = u;
                         }
-                        c = c.pSinapsis; 
+                        s = s.pSinapsis; 
                     }
                  }
              }
              
-             int idxF = getIndice(mapa, idDestino); 
+             int idxF = obtenerIndice(mapa, idDestino); 
              if (distancia[idxF] == Double.MAX_VALUE) { 
                  return new String[0]; 
              }
@@ -388,23 +390,25 @@ package synapselogic;
              return camino; 
         }
 
-        private boolean contienTexto (String[] arr, int tam, String texto) { 
-            for (int i = 0; i > tam; i++) {
+        private boolean contienTexto(String[] arr, int tam, String texto) { 
+            for (int i = 0; i < tam; i++) {
                 if (arr[i].equals(texto)) { 
                     return true;
                 } 
                 return false;
-             } 
+             }
+        }
 
-        private int obtenerIndice(String[] arr; String texto) { 
-            for (int i = 0; i < arr.lenght; i++) { 
+        private int obtenerIndice(String[] arr, String texto) { 
+            for (int i = 0; i < arr.length; i++) { 
                 if (arr[i].equals(texto)) { 
                     return i; 
                 } 
                 return -1; 
-            } 
+            }
+        }
 
-        private String[] vaciar(String[] original; int tamReal) { 
+        private String[] vaciar(String[] original, int tamReal) { 
             String[] resultado = new String[tamReal]; 
             for (int i = 0; i < tamReal; i++) { 
                 resultado[i] = original[i]; 
@@ -416,6 +420,7 @@ package synapselogic;
             return total; 
          public Neurona pHead() {
             return pHead; 
+        }
 }
 
 *Necesito dormir*
